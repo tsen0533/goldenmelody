@@ -64,68 +64,64 @@
   </style>
 </head>
 <body>
-
 <h2>🎵 首注音猜歌挑戰 🎵</h2>
-
-<div class="note">
-  <p><strong>｜遊戲規則｜</strong></p>
-  <ul>
-    <li>本遊戲共 9 題，根據提示的注音文字，輸入此句歌詞所對應到的歌名。</li>
-    <li><strong>只需輸入中文，不需標點符號、英文或空格</strong>。</li>
-    <li>猜對一題得一分，若猜不出可留空。</li>
-    <li>完成後，系統會根據你的得分給出回饋！</li>
-  </ul>
-  <p><strong>｜示範題｜</strong></p>
-  <p>提示：ㄆㄈ ㄐㄎ ㄎㄌ ㄨㄨㄍㄔ ㄕㄍㄐㄍ</p>
-  <p>正解：第四十二屆政大金旋獎主題曲《平凡健康快樂 Ordinary, healthy and happy》中的歌詞「平凡 健康 快樂／往往過程 勝過結果」</p>
-  <p>答案只需輸入：<strong><span style="color: red;">平凡健康快樂</span></strong>即可</p>
+  <div class="note">
+    <p><strong>｜遊戲規則｜</strong></p>
+    <ul>
+      <li>本遊戲共 9 題，根據提示的注音文字，輸入此句歌詞所對應到的歌名。</li>
+      <li><strong>只需輸入中文，不需標點符號、英文或空格</strong>。</li>
+      <li>猜對一題得一分，若猜不出可留空。</li>
+      <li>完成後，系統會根據你的得分給出回饋！</li>
+    </ul>
+    <p><strong>｜示範題｜</strong></p>
+    <p>提示：ㄆㄈ ㄐㄎ ㄎㄌ ㄨㄨㄍㄔ ㄕㄍㄐㄍ</p>
+    <p>正解：第42屆政大金旋獎主題曲《平凡健康快樂 Ordinary, healthy and happy》中的歌詞「平凡 健康 快樂／往往過程 勝過結果」</p>
+    <p>答案只需輸入：<strong><span style="color: red;">平凡健康快樂</span></strong>即可</p>
   </div>
 
+  <form id="quizForm">
+    <div class="question">
+      <label><strong>1. 光：ㄧㄧㄕ光   ㄋㄕㄐ   ㄕㄕㄇㄊㄉㄘㄧ</strong></label>
+      <input type="text" name="q1">
+    </div>
+    <div class="question">
+      <label><strong>2. 照：ㄨㄈㄓㄋㄒㄐ照ㄆ   ㄕㄌㄨㄓㄌㄅㄍㄐㄉㄐㄅ</strong></label>
+      <input type="text" name="q2">
+    </div>
+    <div class="question">
+      <label><strong>3. 亮：ㄧㄎㄓㄗ亮ㄉㄒ   ㄋㄈㄊㄑ</strong></label>
+      <input type="text" name="q3">
+    </div>
+    <div class="question">
+      <label><strong>4. 你：你ㄓㄉ ㄐㄙㄉㄩㄖㄓㄗㄔㄕㄉㄉ</strong></label>
+      <input type="text" name="q4">
+    </div>
+    <div class="question">
+      <label><strong>5. 的：ㄎㄅㄨ的ㄅㄕㄉㄉㄗ</strong></label>
+      <input type="text" name="q5">
+    </div>
+    <div class="question">
+      <label><strong>6. 音：ㄦㄨㄊㄐㄒㄩㄉㄕ音，ㄒㄑㄋㄩㄔㄩㄕㄞㄑ</strong></label>
+      <input type="text" name="q6">
+    </div>
+    <div class="question">
+      <label><strong>7. 樂：ㄓㄕㄏㄧㄉㄧ樂ㄏㄏㄒㄓㄓ   ㄧㄗㄇㄊㄋ</stbel>
+      <input type="text" name="q7">
+    </div>
+    <div class="question">
+      <label><strong>8. 夢：ㄨㄓㄉ　ㄨㄉㄨㄌㄅㄕ夢</stbel>
+      <input type="text" name="q8">
+    </div>
+    <div class="question">
+      <label><strong>9. 想：ㄕ   想ㄧㄓㄉㄨ</stbel>
+      <input type="text" name="q9">
+    </div>
 
-<form id="quizForm">
-  <div class="question">
-    <label><strong>1. 光：ㄧㄧㄕ光 ㄋㄕㄐ ㄕㄕㄇㄊㄉㄘㄧ</strong></label>
-    <input type="text" name="q1">
-  </div>
-  <div class="question">
-    <label><strong>2. 照：ㄨㄈㄓㄋㄒㄐ照ㄆ ㄕㄌㄨㄓㄌㄅㄍㄐㄉㄐㄅ</strong></label>
-    <input type="text" name="q2">
-  </div>
-  <div class="question">
-    <label><strong>3. 亮：ㄧㄎㄓㄗ亮ㄉㄒ ㄋㄈㄊㄑ</strong></label>
-    <input type="text" name="q3">
-  </div>
-  <div class="question">
-    <label><strong>4. 你：你ㄓㄉ ㄐㄙㄉㄩㄖㄓㄗㄔㄕㄉㄉ</strong></label>
-    <input type="text" name="q4">
-  </div>
-  <div class="question">
-    <label><strong>5. 的：ㄎㄅㄨ的ㄅㄕㄉㄉㄗ</strong></label>
-    <input type="text" name="q5">
-  </div>
-  <div class="question">
-    <label><strong>6. 音：ㄦㄨㄊㄐㄒㄩㄉㄕ音，ㄒㄑㄋㄩㄔㄩㄕㄞㄑ</strong></label>
-    <input type="text" name="q6">
-  </div>
-  <div class="question">
-    <label><strong>7. 樂：ㄓㄕㄏㄧㄉㄧ樂ㄏㄏㄒㄓㄓ ㄧㄗㄇㄊㄋ</strong></label>
-    <input type="text" name="q7">
-  </div>
-  <div class="question">
-    <label><strong>8. 夢：ㄨㄓㄉ ㄨㄉㄨㄌㄅㄕ夢</strong></label>
-    <input type="text" name="q8">
-  </div>
-  <div class="question">
-    <label><strong>9. 想：ㄕ 想ㄧㄓㄉㄨ</strong></label>
-    <input type="text" name="q9">
-  </div>
+    <button type="submit">提交答案</button>
+  </form>
 
-  <button type="submit">提交答案</button>
-</form>
+  <div class="result" id="result"></div>
 
-<div class="result" id="result"></div>
-
-<script>
 <script>
   const answers = [
     "逆光",
@@ -152,13 +148,6 @@
         score += 1;
       }
     });
-
-    // ✅ 跳轉到 result.html，並帶上 score 參數
-    window.location.href = `result.html?score=${score}`;
-  });
 </script>
-
-  
-
 </body>
 </html>
