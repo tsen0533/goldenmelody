@@ -151,11 +151,4 @@
     // ✅ 跳轉到 result.html，並帶上 score 參數
     window.location.href = `result.html?score=${score}`;
   });
-fetch("/submit", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({ score: score })
-});
 </script>
