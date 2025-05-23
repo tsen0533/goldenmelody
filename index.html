@@ -8,60 +8,59 @@
       font-family: "微軟正黑體", sans-serif;
       padding: 30px;
       line-height: 1.8;
+      background-color: #fffefc;
       max-width: 800px;
       margin: auto;
-      background-image: url("IMG_1794.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      position: relative;
     }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(255, 255, 255, 0.7);
-      z-index: -1;
-    }
-
-    h2 {
+    h1 {
       color: #333;
-      text-align: center;
     }
-
-    .note {
-      background: #f9f9f9;
-      border-left: 5px solid #ccc;
-      padding: 15px;
-      margin-bottom: 30px;
-    }
-
     .question {
       margin-top: 20px;
     }
-
     input[type="text"] {
       width: 100%;
       padding: 8px;
       font-size: 16px;
       margin-top: 5px;
-    }
 
+    }
     button {
       margin-top: 30px;
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
     }
-
     .result {
       margin-top: 30px;
       font-weight: bold;
       font-size: 18px;
       color: #005c99;
     }
+    .note {
+      background: #f9f9f9;
+      border-left: 5px solid #ccc;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+  body {
+    background-image: url("IMG_1794.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+ body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7); /* 遮罩為 30% 透明，圖片看起來像 70% */
+  z-index: -1;
+}
   </style>
+
+
 </head>
 <body>
 <h2>🎵 首注音猜歌挑戰 🎵</h2>
@@ -75,7 +74,7 @@
     </ul>
     <p><strong>｜示範題｜</strong></p>
     <p>提示：ㄆㄈ ㄐㄎ ㄎㄌ ㄨㄨㄍㄔ ㄕㄍㄐㄍ</p>
-    <p>正解：第42屆政大金旋獎主題曲《平凡健康快樂 Ordinary, healthy and happy》中的歌詞「平凡 健康 快樂／往往過程 勝過結果」</p>
+    <p>正解：第四十二屆政大金旋獎主題曲《平凡健康快樂 Ordinary, healthy and happy》中的歌詞「平凡 健康 快樂／往往過程 勝過結果」</p>
     <p>答案只需輸入：<strong><span style="color: red;">平凡健康快樂</span></strong>即可</p>
   </div>
 
@@ -140,7 +139,7 @@
 
     let score = 0;
     const inputs = document.querySelectorAll("input[type='text']");
-    
+
     inputs.forEach((input, index) => {
       const userAnswer = input.value.trim().replace(/\s+/g, '');
       const correctAnswer = (answers[index] || "").replace(/\s+/g, '');
@@ -148,6 +147,15 @@
         score += 1;
       }
     });
+
+    // ✅ 跳轉到 result.html，並帶上 score 參數
+    window.location.href = `result.html?score=${score}`;
+  });
+fetch("/submit", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ score: score })
+});
 </script>
-</body>
-</html>
