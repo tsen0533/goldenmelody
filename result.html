@@ -1,34 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8">
-  <title>你的結果</title>
-  <style>
-    body {
-      font-family: "微軟正黑體", sans-serif;
-      text-align: center;
-      padding: 50px;
-      background-color: #f5f5f5;
-    }
-    .result {
-      font-size: 24px;
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
-    img {
-      max-width:600px;
-      border-radius: 0px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-  </style>
-</head>
-<body>
-<!-- 放在 <body> 裡最上面 -->
-  <div class="result" id="resultText"></div>
-  <img id="resultImage" src="" alt="結果圖片">
-
-  <script>
-  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxK7iWtoFUPUvCgNdZ5XCDjh4dbEWRTNg3G9iX0RciqIenKfOrnENeEi35ooTIurrKF/exec";
+<script>
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxK7iWtoFUPUvCgNdZ5XCDjh4dbEWRTNg3G9iX0RciqIenKfOrnENeEi35ooTIurrKF/exec";
 
 function getScoreFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -36,6 +7,13 @@ function getScoreFromUrl() {
 }
 const score = getScoreFromUrl();
 
+// 1. 取得暱稱（可選）
+const userName = prompt("請輸入你的暱稱（可留空）") || "";
+
+// 2. 取得答案
+const userAnswers = JSON.parse(localStorage.getItem("goldenmelody-answers")) || [];
+
+// 3. 送出資料
 function submitResultToSheet(name, score, answers) {
   fetch(GOOGLE_SCRIPT_URL, {
     method: "POST",
@@ -49,18 +27,9 @@ function submitResultToSheet(name, score, answers) {
     }
   }).then(r => r.json())
     .then(res => {
-      // 可以顯示感謝、或不用理會
       console.log("已送出", res);
     });
 }
-
-// 這裡可以問使用者名稱（可選，或匿名）
-const userName = ""; // 你可改成 prompt("請輸入你的暱稱") 或空字串
-
-// 取得答案內容（如果你要記錄答案，要把答案從 quizForm 存進 localStorage 或 query string）
-const userAnswers = []; // 你如果想送答案，需要從 quizForm 存起來
-
-// 送出資料
 submitResultToSheet(userName, score, userAnswers);
 
 // 下面是顯示圖片的部分
@@ -69,7 +38,7 @@ const resultImage = document.getElementById("resultImage");
 
 if (score <= 2) {
   resultText.innerText = `🥲 猜不透的不只是他的心，還有題目（得分：${score}/9）`;
-  resultImage.src = "IMG_1797.JPG"; // 你可以用你自己的圖
+  resultImage.src = "IMG_1797.JPG";
 } else if (score <= 6) {
   resultText.innerText = `🤔 瞎猜微懂，多多加油！（得分：${score}/9）`;
   resultImage.src = "IMG_1795.JPG";
@@ -77,6 +46,4 @@ if (score <= 2) {
   resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/9）`;
   resultImage.src = "IMG_1796.JPG";
 }
-  </script>
-</body>
-</html>
+</script>
