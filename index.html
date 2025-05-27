@@ -146,13 +146,6 @@ body {
     }
   });
 
-  // 存下所有答案
-  const userAnswers = [];
-  inputs.forEach(input => {
-    userAnswers.push(input.value.trim());
-  });
-  localStorage.setItem("goldenmelody-answers", JSON.stringify(userAnswers));
-
   // 跳轉到結果頁
   window.location.href = `result.html?score=${score}`;
 });
