@@ -133,18 +133,29 @@ body {
   ];
 
   document.getElementById("quizForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    let score = 0;
-    const inputs = document.querySelectorAll("input[type='text']");
+  let score = 0;
+  const inputs = document.querySelectorAll("input[type='text']");
 
-    inputs.forEach((input, index) => {
-      const userAnswer = input.value.trim().replace(/\s+/g, '');
-      const correctAnswer = (answers[index] || "").replace(/\s+/g, '');
-      if (userAnswer === correctAnswer) {
-        score += 1;
-      }
-    });
+  inputs.forEach((input, index) => {
+    const userAnswer = input.value.trim().replace(/\s+/g, '');
+    const correctAnswer = (answers[index] || "").replace(/\s+/g, '');
+    if (userAnswer === correctAnswer) {
+      score += 1;
+    }
+  });
+
+  // 存下所有答案
+  const userAnswers = [];
+  inputs.forEach(input => {
+    userAnswers.push(input.value.trim());
+  });
+  localStorage.setItem("goldenmelody-answers", JSON.stringify(userAnswers));
+
+  // 跳轉到結果頁
+  window.location.href = `result.html?score=${score}`;
+});
 
     // ✅ 跳轉到 result.html，並帶上 score 參數
    window.location.href = `result.html?score=${score}`;
