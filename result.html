@@ -1,66 +1,72 @@
-<div id="result">
-  <div id="resultText"></div>
-  <img id="resultImage" style="max-width: 300px;" />
-  <div id="nicknameInputContainer" style="margin-top: 15px;">
-    <input id="nicknameInput" type="text" placeholder="請輸入你的暱稱（可留空）" />
-    <button id="submitBtn">提交</button>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>金曲得分結果</title>
+</head>
+<body>
+  <div id="result">
+    <div id="resultText"></div>
+    <img id="resultImage" style="max-width: 300px;" />
+    <div id="nicknameInputContainer" style="margin-top: 15px;">
+      <input id="nicknameInput" type="text" placeholder="請輸入你的暱稱（可留空）" />
+      <button id="submitBtn">提交</button>
+    </div>
+    <div id="submitStatus"></div>
   </div>
-  <div id="submitStatus"></div>
-</div>
 
-<script>
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxK7iWtoFUPUvCgNdZ5XCDjh4dbEWRTNg3G9iX0RciqIenKfOrnENeEi35ooTIurrKF/exec";
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxK7iWtoFUPUvCgNdZ5XCDjh4dbEWRTNg3G9iX0RciqIenKfOrnENeEi35ooTIurrKF/exec";
 
-// 取得分數，取得答案
-function getScoreFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  return parseInt(params.get('score'), 10) || 0;
-}
-const score = getScoreFromUrl();
-const userAnswers = JSON.parse(localStorage.getItem("goldenmelody-answers")) || [];
-
-// 顯示結果
-const resultText = document.getElementById("resultText");
-const resultImage = document.getElementById("resultImage");
-
-if (score <= 2) {
-  resultText.innerText = `🥲 猜不透的不只是他的心，還有題目（得分：${score}/9）`;
-  resultImage.src = "IMG_1797.JPG";
-} else if (score <= 6) {
-  resultText.innerText = `🤔 瞎猜微懂，多多加油！（得分：${score}/9）`;
-  resultImage.src = "IMG_1795.JPG";
-} else {
-  resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/9）`;
-  resultImage.src = "IMG_1796.JPG";
-}
-
-// 處理提交
-const submitBtn = document.getElementById('submitBtn');
-const nicknameInput = document.getElementById('nicknameInput');
-const submitStatus = document.getElementById('submitStatus');
-
-submitBtn.addEventListener('click', function() {
-  const userName = nicknameInput.value.trim();
-  submitBtn.disabled = true;
-  submitStatus.innerText = "提交中...";
-  fetch(GOOGLE_SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      name: userName,
-      score: score,
-      answers: userAnswers
-    }),
-    headers: {
-      "Content-Type": "application/json"
+    function getScoreFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return parseInt(params.get('score'), 10) || 0;
     }
-  }).then(r => r.json())
-    .then(res => {
-      submitStatus.innerText = "送出成功，謝謝參與！";
-      submitBtn.disabled = false;
-    })
-    .catch(() => {
-      submitStatus.innerText = "送出失敗，請再試一次。";
-      submitBtn.disabled = false;
+    const score = getScoreFromUrl();
+    const userAnswers = JSON.parse(localStorage.getItem("goldenmelody-answers")) || [];
+
+    const resultText = document.getElementById("resultText");
+    const resultImage = document.getElementById("resultImage");
+
+    if (score <= 2) {
+      resultText.innerText = `🥲 猜不透的不只是他的心，還有題目（得分：${score}/9）`;
+      resultImage.src = "IMG_1797.JPG";
+    } else if (score <= 6) {
+      resultText.innerText = `🤔 瞎猜微懂，多多加油！（得分：${score}/9）`;
+      resultImage.src = "IMG_1795.JPG";
+    } else {
+      resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/9）`;
+      resultImage.src = "IMG_1796.JPG";
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    const nicknameInput = document.getElementById('nicknameInput');
+    const submitStatus = document.getElementById('submitStatus');
+
+    submitBtn.addEventListener('click', function() {
+      const userName = nicknameInput.value.trim();
+      submitBtn.disabled = true;
+      submitStatus.innerText = "提交中...";
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          name: userName,
+          score: score,
+          answers: userAnswers
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(r => r.json())
+        .then(res => {
+          submitStatus.innerText = "送出成功，謝謝參與！";
+          submitBtn.disabled = false;
+        })
+        .catch(() => {
+          submitStatus.innerText = "送出失敗，請再試一次。";
+          submitBtn.disabled = false;
+        });
     });
-});
-</script>
+  </script>
+</body>
+</html>
