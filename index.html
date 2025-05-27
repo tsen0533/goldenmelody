@@ -43,23 +43,31 @@
       padding: 15px;
       margin-bottom: 30px;
     }
+body {
+  font-family: "微軟正黑體", sans-serif;
+  padding: 30px;
+  line-height: 1.8;
+  background-color: #fffefc;
+  max-width: 800px;
+  margin: auto;
+  background-image: url("IMG_1794.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
   body {
-    background-image: url("IMG_1794.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
+    background-image: url("IMG_mobile.jpg");
   }
- @media screen and (max-width: 768px) {
-    body {
-      background-image: url("IMG_mobile.jpg");
-    }
-  }
- body::before {
+}
+
+body::before {
   content: "";
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(255, 255, 255, 0.7); /* 遮罩為 30% 透明，圖片看起來像 70% */
+  background-color: rgba(255, 255, 255, 0.7);
   z-index: -1;
 }
   </style>
