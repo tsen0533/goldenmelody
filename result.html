@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>你的結果</title>
   <style>
     body {
       font-family: "微軟正黑體", sans-serif;
       text-align: center;
-      padding: 50px;
-      background-color: #f5f5f5;
+      padding: 3em;
+      background: #f5f5f5;
     }
     .result {
-      font-size: 24px;
-      margin-top: 30px;
-      margin-bottom: 30px;
+      font-size: 1.5em;
+      margin: 2em 0;
     }
     img {
       max-width: 600px;
-      border-radius: 0px;
+      border-radius: 0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-  <div class="result" id="resultText"></div>
-  <img id="resultImage" src="" alt="結果圖片">
+  <div id="resultContainer"></div>
 
   <script>
-    function getScoreFromUrl() {
-      const params = new URLSearchParams(window.location.search);
-      return parseInt(params.get('score'), 10) || 0;
-    }
+    const score = new URLSearchParams(location.search).get('score') || 0;
 
-    const score = getScoreFromUrl();
-    const resultText = document.getElementById("resultText");
-    const resultImage = document.getElementById("resultImage");
+    const levels = [
+      {
+        max: 6,
+        text: "🥲 猜不透的不只是他的心，還有題目",
+        img: "IMG_1797.JPG"
+      },
+      {
+        max: 13,
+        text: "🤔 瞎猜微懂，多多加油！",
+        img: "IMG_1795.JPG"
+      },
+      {
+        max: 18,
+        text: "🎉 懂哥出手了！！",
+        img: "IMG_1796.JPG"
+      }
+    ];
 
-    // 依據新總分 18 調整區間
-    if (score <= 6) {
-      resultText.innerText = `🥲 猜不透的不只是他的心，還有題目（得分：${score}/18）`;
-      resultImage.src = "IMG_1797.JPG";
-    } else if (score <= 13) {
-      resultText.innerText = `🤔 瞎猜微懂，多多加油！（得分：${score}/18）`;
-      resultImage.src = "IMG_1795.JPG";
-    } else {
-      resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/18）`;
-      resultImage.src = "IMG_1796.JPG";
-    }
+    const { text, img } = levels.find(l => score <= l.max);
+    document.getElementById("resultContainer").innerHTML = `
+      <div class="result">${text}（得分：${score}/18）</div>
+      <img src="${img}" alt="結果圖片">
+    `;
   </script>
 </body>
 </html>
