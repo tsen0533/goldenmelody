@@ -47,6 +47,37 @@
       resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/9）`;
       resultImage.src = "IMG_1796.JPG";
     }
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_ePO1tlhkKwF_HtcsfeShghxPoOfb1D-o8lQJN7L5CBSZAuRXCUTcAnXEpeoU06Wt/exec";
+
+function submitResultToSheet(name, score, answers) {
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      name: name,
+      score: score,
+      answers: answers
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(r => r.json())
+    .then(res => {
+      // 可以顯示感謝、或不用理會
+      console.log("已送出", res);
+    });
+}
+
+// 取得分數
+const score = getScoreFromUrl();
+
+// 這裡可以問使用者名稱（可選，或匿名）
+const userName = ""; // 你可改成 prompt("請輸入你的暱稱") 或空字串
+
+// 取得答案內容（如果你要記錄答案，要把答案從 quizForm 存進 localStorage 或 query string）
+const userAnswers = []; // 你如果想送答案，需要從 quizForm 存起來
+
+// 送出資料
+submitResultToSheet(userName, score, userAnswers);
   </script>
 </body>
 </html>
