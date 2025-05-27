@@ -16,14 +16,13 @@
       margin-bottom: 30px;
     }
     img {
-      max-width:600px;
+      max-width: 600px;
       border-radius: 0px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-<!-- 放在 <body> 裡最上面 -->
   <div class="result" id="resultText"></div>
   <img id="resultImage" src="" alt="結果圖片">
 
@@ -37,14 +36,15 @@
     const resultText = document.getElementById("resultText");
     const resultImage = document.getElementById("resultImage");
 
-    if (score <= 2) {
-      resultText.innerText = `🥲 猜不透的不只是他的心，還有題目（得分：${score}/9）`;
-      resultImage.src = "IMG_1797.JPG"; // 你可以用你自己的圖
-    } else if (score <= 6) {
-      resultText.innerText = `🤔 瞎猜微懂，多多加油！（得分：${score}/9）`;
+    // 依據新總分 18 調整區間
+    if (score <= 6) {
+      resultText.innerText = `🥲 猜不透的不只是他的心，還有題目（得分：${score}/18）`;
+      resultImage.src = "IMG_1797.JPG";
+    } else if (score <= 13) {
+      resultText.innerText = `🤔 瞎猜微懂，多多加油！（得分：${score}/18）`;
       resultImage.src = "IMG_1795.JPG";
     } else {
-      resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/9）`;
+      resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/18）`;
       resultImage.src = "IMG_1796.JPG";
     }
   </script>
