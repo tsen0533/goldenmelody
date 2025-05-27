@@ -36,6 +36,7 @@
     const score = getScoreFromUrl();
     const resultText = document.getElementById("resultText");
     const resultImage = document.getElementById("resultImage");
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_ePO1tlhkKwF_HtcsfeShghxPoOfb1D-o8lQJN7L5CBSZAuRXCUTcAnXEpeoU06Wt/exec";
 
     if (score <= 2) {
       resultText.innerText = `🥲 猜不透的不只是他的心，還有題目（得分：${score}/9）`;
@@ -47,6 +48,7 @@
       resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/9）`;
       resultImage.src = "IMG_1796.JPG";
     }
+
   </script>
 </body>
 </html>
