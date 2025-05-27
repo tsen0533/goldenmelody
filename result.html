@@ -29,7 +29,13 @@
 
   <script>
     function getScoreFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return parseInt(params.get('score'), 10) || 0;
+    }
+
     const score = getScoreFromUrl();
+    const resultText = document.getElementById("resultText");
+    const resultImage = document.getElementById("resultImage");
 
     if (score <= 2) {
       resultText.innerText = `🥲 猜不透的不只是他的心，還有題目（得分：${score}/9）`;
@@ -41,7 +47,6 @@
       resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/9）`;
       resultImage.src = "IMG_1796.JPG";
     }
-
   </script>
 </body>
 </html>
