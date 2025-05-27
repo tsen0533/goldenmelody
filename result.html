@@ -28,26 +28,13 @@
   <img id="resultImage" src="" alt="結果圖片">
 
   <script>
-    function getScoreFromUrl() {
-      const params = new URLSearchParams(window.location.search);
-      return parseInt(params.get('score'), 10) || 0;
-    }
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_ePO1tlhkKwF_HtcsfeShghxPoOfb1D-o8lQJN7L5CBSZAuRXCUTcAnXEpeoU06Wt/exec";
 
-    const score = getScoreFromUrl();
-    const resultText = document.getElementById("resultText");
-    const resultImage = document.getElementById("resultImage");
-
-    if (score <= 2) {
-      resultText.innerText = `🥲 猜不透的不只是他的心，還有題目（得分：${score}/9）`;
-      resultImage.src = "IMG_1797.JPG"; // 你可以用你自己的圖
-    } else if (score <= 6) {
-      resultText.innerText = `🤔 瞎猜微懂，多多加油！（得分：${score}/9）`;
-      resultImage.src = "IMG_1795.JPG";
-    } else {
-      resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/9）`;
-      resultImage.src = "IMG_1796.JPG";
-    }
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_ePO1tlhkKwF_HtcsfeShghxPoOfb1D-o8lQJN7L5CBSZAuRXCUTcAnXEpeoU06Wt/exec";
+function getScoreFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return parseInt(params.get('score'), 10) || 0;
+}
+const score = getScoreFromUrl();
 
 function submitResultToSheet(name, score, answers) {
   fetch(GOOGLE_SCRIPT_URL, {
@@ -67,9 +54,6 @@ function submitResultToSheet(name, score, answers) {
     });
 }
 
-// 取得分數
-const score = getScoreFromUrl();
-
 // 這裡可以問使用者名稱（可選，或匿名）
 const userName = ""; // 你可改成 prompt("請輸入你的暱稱") 或空字串
 
@@ -78,6 +62,21 @@ const userAnswers = []; // 你如果想送答案，需要從 quizForm 存起來
 
 // 送出資料
 submitResultToSheet(userName, score, userAnswers);
+
+// 下面是顯示圖片的部分
+const resultText = document.getElementById("resultText");
+const resultImage = document.getElementById("resultImage");
+
+if (score <= 2) {
+  resultText.innerText = `🥲 猜不透的不只是他的心，還有題目（得分：${score}/9）`;
+  resultImage.src = "IMG_1797.JPG"; // 你可以用你自己的圖
+} else if (score <= 6) {
+  resultText.innerText = `🤔 瞎猜微懂，多多加油！（得分：${score}/9）`;
+  resultImage.src = "IMG_1795.JPG";
+} else {
+  resultText.innerText = `🎉 懂哥出手了！！（得分：${score}/9）`;
+  resultImage.src = "IMG_1796.JPG";
+}
   </script>
 </body>
 </html>
