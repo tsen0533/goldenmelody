@@ -50,7 +50,11 @@
     background-repeat: no-repeat;
     position: relative;
   }
-
+ @media screen and (max-width: 768px) {
+    body {
+      background-image: url("IMG_mobile.jpg");
+    }
+  }
  body::before {
   content: "";
   position: fixed;
